@@ -2,7 +2,8 @@
 
 A hands-on internship project covering OSINT footprinting with theHarvester and local network discovery with Zenmap
 
-`Skill: Cybersecurity` `Kali Linux` `theHarvester` `Zenmap` `Nmap` `Ethical Hacking` `Networkwalks` `Cybersecurity Intern B083`
+![Skill](https://img.shields.io/badge/Skill-Cybersecurity-red) ![Kali](https://img.shields.io/badge/Kali_Linux-2026.2-orange) ![theHarvester](https://img.shields.io/badge/theHarvester-4.10-blue) ![Zenmap](https://img.shields.io/badge/Zenmap-Nmap_GUI-blue) ![Skill](https://img.shields.io/badge/Skill-Footprinting-red) ![Skill](https://img.shields.io/badge/Skill-Network_Scanning-red) ![Ethical Hacking](https://img.shields.io/badge/Ethical_Hacking-orange) ![Networkwalks](https://img.shields.io/badge/Networkwalks-black) ![Author](https://img.shields.io/badge/Author-Salifu_Isaiah-red)
+
 
 ## 📌 About This Project
 This project documents two practical exercises completed during Week 2 of my Cybersecurity internship at Networkwalks: footprinting the microsoft.com domain using theHarvester in Kali Linux, and scanning my own local network using Zenmap on Windows.
@@ -80,6 +81,23 @@ I also completed the official practice lab quiz on Networkwalks' site to confirm
 | 4 | Live hosts discoverable on local network | Zenmap identified 2 live hosts on my hotspot network | On a larger or shared network, this reveals every reachable device to an attacker |
 
 These findings are observations from reconnaissance and discovery activities, not confirmed vulnerabilities. No exploitation was attempted or required for either module.
+
+## 🐛 Problems Faced & Solutions
+
+### Problem 1: theHarvester command deprecated
+When I tried running my second theHarvester command, I got a message saying the capitalized `theHarvester` command was deprecated in favor of `theharvester` (all lowercase).
+
+**Fix:** Switched to the lowercase `theharvester` command going forward. Both versions work the same way, it was just a naming update in the newer tool version.
+
+### Problem 2: First scan results not saved
+My very first theHarvester run wasn't saved to a file, so once the terminal output scrolled past, I lost that evidence and had to run the command again.
+
+**Fix:** Re-ran the command using the `-f` flag to save results directly to a file, e.g. `theharvester -d microsoft.com -l 1000 -b baidu -f task1_baidu_results`. This saves the output as both XML and JSON, so it's always available afterward, screenshot or not.
+
+### Problem 3: Non-standard subnet on my network
+The practical example assumed a typical home network subnet mask of 255.255.255.0 (a /24 network with 256 addresses). My actual network, connected through a mobile hotspot, used 255.255.255.240 instead (a /28 network with only 16 addresses).
+
+**Fix:** Ran `ipconfig` first to check my actual subnet mask rather than assuming it matched the example, then calculated the correct scan range as 172.20.10.0/28 instead of copying the /24 range from the practical. This ensured my scan covered the correct address space instead of a much larger, inaccurate one.
 
 ## 💡 Recommendations
 - Be selective about which email addresses are made public, since harvested emails can become phishing targets
